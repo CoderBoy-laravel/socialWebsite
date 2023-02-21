@@ -36,7 +36,7 @@ const Verify = () => {
     if (data.emailVerified) {
       redirect("/");
     }
-  }, []);
+  }, [data.emailVerified, redirect]);
   return (
     <div className="lg:w-[1440px] w-full lg:px-0 px-5 m-auto flex items-center h-screen justify-center">
       <ToastContainer />
