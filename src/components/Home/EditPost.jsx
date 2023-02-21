@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const EditPost = (props) => {
   const [post, setPost] = useState(props.post.post);
-  const [imaglink, setImageLinks] = useState(props.post.images);
+  const [imaglink] = useState(props.post.images);
   const [file, setFile] = useState(props.post.images);
   const [newFile, setNewFile] = useState([]);
   const [image, setImage] = useState("");

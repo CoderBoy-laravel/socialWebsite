@@ -26,9 +26,7 @@ const Register = () => {
 
   const emailHandler = (e) => {
     if (e.target.value.length > 0) {
-      if (
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)
-      ) {
+      if (e.target.value.match(/[^\s@]+@[^\s@]+\.[^\s@]+/)) {
         setEmail(e.target.value);
         setEmailerr("");
       } else {
