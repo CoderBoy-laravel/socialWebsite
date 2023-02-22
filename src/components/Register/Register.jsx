@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdate } from "../../Slices/UserSlice";
+import { getDatabase, ref as dbRef, set } from "firebase/database";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Register = () => {
   const [nameerr, setNameerr] = useState("");
   const [passworderr, setPassworderr] = useState("");
   const auth = getAuth();
+  const db = getDatabase();
   const data = useSelector((state) => state.userInfo.user);
 
   const emailHandler = (e) => {
@@ -80,6 +82,14 @@ const Register = () => {
         .then((user) => {
           const userData = user.user;
           sendEmailVerification(userData).then(() => {
+            set(dbRef(db, "users/" + userData.uid), {
+              bio: "",
+              name: name,
+              about: "",
+              cover: "",
+              profile: "no",
+              location: "",
+            });
             updateProfile(userData, {
               displayName: name,
             });

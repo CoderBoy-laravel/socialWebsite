@@ -505,7 +505,11 @@ const Profile = () => {
                       >
                         <div className="w-24">
                           <img
-                            src={item[1].profile}
+                            src={
+                              item[1].profile.length > 3
+                                ? item[1].profile
+                                : "default.png"
+                            }
                             alt="profile"
                             className="w-12 h-12 rounded-full"
                           />
@@ -532,7 +536,11 @@ const Profile = () => {
                       >
                         <div className="w-24">
                           <img
-                            src={item[1].profile}
+                            src={
+                              item[1].profile.length > 3
+                                ? item[1].profile
+                                : "default.png"
+                            }
                             alt="profile"
                             className="w-12 h-12 rounded-full"
                           />
@@ -636,6 +644,12 @@ const Profile = () => {
         <div className="fixed top-0 left-0 w-full h-screen z-20">
           <div className="relative w-full h-screen bg-[#000000b2]">
             <div className="absolute top-2/4 w-2/4 h-2/4 translate-x-1/2 -translate-y-1/2">
+              <div className="pb-3 border-b flex justify-end mb-4 pr-5 pt-5 bg-white">
+                <MdOutlineClose
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setImage("")}
+                />
+              </div>
               <Cropper
                 style={{ height: "100%", width: "100%" }}
                 src={image}
@@ -662,6 +676,12 @@ const Profile = () => {
         <div className="fixed top-0 left-0 w-full h-screen z-20">
           <div className="relative w-full h-screen bg-[#000000b2]">
             <div className="absolute top-2/4 w-2/4 h-2/4 translate-x-1/2 -translate-y-1/2">
+              <div className="pb-3 border-b flex justify-end mb-4 pr-5 pt-5 bg-white">
+                <MdOutlineClose
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setProfile("")}
+                />
+              </div>
               <Cropper
                 style={{ height: "100%", width: "100%" }}
                 src={profile}

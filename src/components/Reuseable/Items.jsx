@@ -165,7 +165,7 @@ const Items = (props) => {
                     <li
                       onClick={() => {
                         setEdit(true);
-                        setEditId(item.data.id);
+                        setEditId(item.postId);
                         setDropdown(!dropdown);
                       }}
                       className="w-full py-3 pl-5 hover:bg-theme hover:text-white flex items-center justify-start cursor-pointer border-b rounded-t"

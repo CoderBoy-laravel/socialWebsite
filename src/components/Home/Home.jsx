@@ -30,6 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-slideshow-image/dist/styles.css";
 import Pagination from "../Reuseable/Pagination";
+import Confirm from "../Reuseable/Confirm";
 
 const Home = () => {
   const redirect = useNavigate();
@@ -42,6 +43,8 @@ const Home = () => {
   const [bio, setBio] = useState("");
   const [cover, setCover] = useState("");
   const [users, setUsers] = useState([]);
+  const [deleteID, setDeleteID] = useState("");
+  const [showDel, setShowDel] = useState(false);
   const data = useSelector((state) => state.userInfo.user);
   const db = getDatabase();
   const storage = getStorage();
@@ -86,7 +89,19 @@ const Home = () => {
   const postTypeHandler = (e) => {
     setPost(e.target.value);
   };
-
+  const getUpdatedData = () => {
+    get(child(fiRef(db), `post`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const resultArr = Object.entries(snapshot.val());
+          resultArr.sort((a, b) => new Date(b[1].date) - new Date(a[1].date));
+          setResult(resultArr);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const imageHandler = (e) => {
     let files;
     if (e.dataTransfer) {
@@ -263,6 +278,8 @@ const Home = () => {
             data={result}
             id={user && user.uid}
             userInfo={users}
+            del={setShowDel}
+            delID={setDeleteID}
           />
         </div>
         <div className="w-[290px] mt-10 ml-10 relative xl:block hidden">
@@ -353,6 +370,16 @@ const Home = () => {
             </div>
           </div>
         </div>
+      )}
+      {showDel && (
+        <Confirm
+          show={setShowDel}
+          id={deleteID}
+          id2={null}
+          name="post"
+          data={getUpdatedData}
+          delModal={setShowDel}
+        />
       )}
     </div>
   );

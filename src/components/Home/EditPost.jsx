@@ -151,7 +151,7 @@ const EditPost = (props) => {
         name: props.post.name,
         email: props.post.email,
         post: post,
-        images: props.post.images,
+        images: props.post.images ? props.post.images : [],
         date: props.post.date,
       }).then(() => {
         toast.update(toastid, {
@@ -226,7 +226,7 @@ const EditPost = (props) => {
         <div className="px-3 flex items-center mt-4">
           <img
             src={
-              props.info.profile !== "no" ? props.info.profile : "default.png"
+              props.info.profile.length > 3 ? props.info.profile : "default.png"
             }
             alt="profile"
             className="w-[52px] h-[52px] rounded-full"
