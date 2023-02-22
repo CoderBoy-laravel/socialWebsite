@@ -96,7 +96,7 @@ const Items = (props) => {
                 <div className="px-3 flex items-center mt-4">
                   <img
                     src={
-                      item.info.profile !== ""
+                      item.info.profile.length > 3
                         ? item.info.profile
                         : "default.png"
                     }
@@ -192,7 +192,9 @@ const Items = (props) => {
               <div className="px-3 flex items-center mt-4">
                 <img
                   src={
-                    item.info.profile !== "" ? item.info.profile : "default.png"
+                    item.info.profile.length > 3
+                      ? item.info.profile
+                      : "default.png"
                   }
                   alt="profile"
                   className="w-[52px] h-[52px] rounded-full"
